@@ -14,9 +14,8 @@ window.addEventListener('load', () => {
 
 
 
-            const proxy = 'http://cors-anywhere.herokuapp.com/';
-            const api = `${proxy}
-            http://api.weatherapi.com/v1/current.json?/e16d6f5f468ba4096b04c25d6346dbb8/${lat},${long}`;
+            const proxy = 'https://cors-anywhere.herokuapp.com/';
+            const api = `${proxy}https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${long}&units=metric&appid=b86fd8f7708187a762619d1377a88ec7`;
 
 
             fetch(api)
@@ -26,19 +25,20 @@ window.addEventListener('load', () => {
                 .then(data => {
                     console.log(data);
 
-                    const { temperature, summary } = data.currently;
 
-                    // const {
-                    //     feels_like
-                    // } = data.main;
+                    // const { temperature, summary } = data.currently;
 
-                    // const {
-                    //     description
-                    // } = data.weather[0];
+                    const {
+                        feels_like
+                    } = data.main;
 
-                    // const {
-                    //     icon
-                    // } = data.weather[0];
+                    const {
+                        description
+                    } = data.weather[0];
+
+                    const {
+                        icon
+                    } = data.weather[0];
 
                     // const icn = `http://openweathermap.org/img/wn//${icon}@2x.png`;
 
@@ -47,9 +47,15 @@ window.addEventListener('load', () => {
                     temperatureDescription.textContent = description;
                     locationTimezone.textContent = data.name;
                     locationIcon.innerHTML = `<img src="icons/${icon}.png">`;
-                    // locationIcon.textContent = icn;
+                    locationIcon.textContent = icn;
                 });
         });
+    }
+    function setIcons(icon, iconID) {
+        const skycons = new Skycons({ color: "white" });
+        const currentIcon = icon.replace(/-/g, "_").toUpperCase();
+        Skycons.play();
+        return skycons.set(iconID, Skycons[currentIcon]);
     }
 }); 
 
