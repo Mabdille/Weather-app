@@ -25,9 +25,6 @@ window.addEventListener('load', () => {
                 .then(data => {
                     console.log(data);
 
-
-                    // const { temperature, summary } = data.currently;
-
                     const {
                         feels_like
                     } = data.main;
@@ -50,12 +47,6 @@ window.addEventListener('load', () => {
                     locationIcon.textContent = icn;
                 });
         });
-    }
-    function setIcons(icon, iconID) {
-        const skycons = new Skycons({ color: "white" });
-        const currentIcon = icon.replace(/-/g, "_").toUpperCase();
-        Skycons.play();
-        return skycons.set(iconID, Skycons[currentIcon]);
     }
 }); 
 
